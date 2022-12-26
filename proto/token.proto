@@ -1,0 +1,9 @@
+syntax = "proto3";
+package token;
+option go_package = "github.com/security-token-core/domain/proto";
+
+message Metadata {
+    string icon = 1;
+    string bgImage = 2;
+    string description = 3;
+}
