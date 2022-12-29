@@ -3,8 +3,9 @@
 
 import * as jspb from "google-protobuf";
 import * as proto_token_pb from "../proto/token_pb";
+import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
-export class DeployToken extends jspb.Message {
+export class DeployNewSecurityToken extends jspb.Message {
   getName(): string;
   setName(value: string): void;
 
@@ -34,20 +35,20 @@ export class DeployToken extends jspb.Message {
 
   hasMetadata(): boolean;
   clearMetadata(): void;
-  getMetadata(): proto_token_pb.Metadata | undefined;
-  setMetadata(value?: proto_token_pb.Metadata): void;
+  getMetadata(): proto_token_pb.SecurityToken.Metadata | undefined;
+  setMetadata(value?: proto_token_pb.SecurityToken.Metadata): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DeployToken.AsObject;
-  static toObject(includeInstance: boolean, msg: DeployToken): DeployToken.AsObject;
+  toObject(includeInstance?: boolean): DeployNewSecurityToken.AsObject;
+  static toObject(includeInstance: boolean, msg: DeployNewSecurityToken): DeployNewSecurityToken.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DeployToken, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DeployToken;
-  static deserializeBinaryFromReader(message: DeployToken, reader: jspb.BinaryReader): DeployToken;
+  static serializeBinaryToWriter(message: DeployNewSecurityToken, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeployNewSecurityToken;
+  static deserializeBinaryFromReader(message: DeployNewSecurityToken, reader: jspb.BinaryReader): DeployNewSecurityToken;
 }
 
-export namespace DeployToken {
+export namespace DeployNewSecurityToken {
   export type AsObject = {
     name: string,
     symbol: string,
@@ -58,7 +59,7 @@ export namespace DeployToken {
     issuer: string,
     redeemer: string,
     moduleEditor: string,
-    metadata?: proto_token_pb.Metadata.AsObject,
+    metadata?: proto_token_pb.SecurityToken.Metadata.AsObject,
   }
 }
 
@@ -115,19 +116,21 @@ export namespace IssueByPartition {
 }
 
 export class Transaction extends jspb.Message {
-  getHash(): string;
-  setHash(value: string): void;
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): Transaction.Metadata | undefined;
+  setMetadata(value?: Transaction.Metadata): void;
 
-  getToken(): string;
-  setToken(value: string): void;
+  getContract(): string;
+  setContract(value: string): void;
 
   getNetwork(): number;
   setNetwork(value: number): void;
 
-  hasDeploytoken(): boolean;
-  clearDeploytoken(): void;
-  getDeploytoken(): DeployToken | undefined;
-  setDeploytoken(value?: DeployToken): void;
+  hasDeploynewsecuritytoken(): boolean;
+  clearDeploynewsecuritytoken(): void;
+  getDeploynewsecuritytoken(): DeployNewSecurityToken | undefined;
+  setDeploynewsecuritytoken(value?: DeployNewSecurityToken): void;
 
   hasTransfer(): boolean;
   clearTransfer(): void;
@@ -152,17 +155,47 @@ export class Transaction extends jspb.Message {
 
 export namespace Transaction {
   export type AsObject = {
-    hash: string,
-    token: string,
+    metadata?: Transaction.Metadata.AsObject,
+    contract: string,
     network: number,
-    deploytoken?: DeployToken.AsObject,
+    deploynewsecuritytoken?: DeployNewSecurityToken.AsObject,
     transfer?: Transfer.AsObject,
     issuebypartition?: IssueByPartition.AsObject,
   }
 
+  export class Metadata extends jspb.Message {
+    getHash(): string;
+    setHash(value: string): void;
+
+    hasDate(): boolean;
+    clearDate(): void;
+    getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setDate(value?: google_protobuf_timestamp_pb.Timestamp): void;
+
+    getReverted(): string;
+    setReverted(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Metadata.AsObject;
+    static toObject(includeInstance: boolean, msg: Metadata): Metadata.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Metadata, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Metadata;
+    static deserializeBinaryFromReader(message: Metadata, reader: jspb.BinaryReader): Metadata;
+  }
+
+  export namespace Metadata {
+    export type AsObject = {
+      hash: string,
+      date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+      reverted: string,
+    }
+  }
+
   export enum DataCase {
     DATA_NOT_SET = 0,
-    DEPLOYTOKEN = 4,
+    DEPLOYNEWSECURITYTOKEN = 4,
     TRANSFER = 5,
     ISSUEBYPARTITION = 6,
   }

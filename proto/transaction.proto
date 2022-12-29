@@ -3,8 +3,10 @@ package transaction;
 option go_package = "github.com/security-token/core";
 
 import "proto/token.proto";
+import "google/protobuf/timestamp.proto";
 
-message DeployToken {
+/* factories/SecurityTokenFactory.sol */ 
+message DeployNewSecurityToken {
     string name = 1;
     string symbol = 2;
     uint64 granularity = 3;
@@ -15,7 +17,7 @@ message DeployToken {
     string redeemer = 8;
     string module_editor = 9;
 
-    token.Metadata metadata = 10;
+    token.SecurityToken.Metadata metadata = 10;
 }
 
 message Transfer {
@@ -30,11 +32,18 @@ message IssueByPartition {
 }
 
 message Transaction {
-    string hash = 1;
-    string token = 2;
+    message Metadata {
+        string hash = 1;
+        google.protobuf.Timestamp date = 2;
+        string reverted = 3;
+    }
+
+    Metadata metadata = 1;
+    string contract = 2;
     uint32 network = 3;
+
     oneof data {
-        DeployToken deployToken = 4;
+        DeployNewSecurityToken deployNewSecurityToken = 4;
         Transfer transfer = 5;
         IssueByPartition issueByPartition = 6;
     }
