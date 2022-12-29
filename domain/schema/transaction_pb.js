@@ -1,4 +1,4 @@
-// source: proto/transaction.proto
+// source: schema/transaction.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -21,8 +21,8 @@ var global = (function() {
   return Function('return this')();
 }.call(null));
 
-var proto_token_pb = require('../proto/token_pb.js');
-goog.object.extend(proto, proto_token_pb);
+var schema_token_pb = require('../schema/token_pb.js');
+goog.object.extend(proto, schema_token_pb);
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.transaction.DeployNewSecurityToken', null, global);
@@ -177,7 +177,7 @@ proto.transaction.DeployNewSecurityToken.toObject = function(includeInstance, ms
     issuer: jspb.Message.getFieldWithDefault(msg, 7, ""),
     redeemer: jspb.Message.getFieldWithDefault(msg, 8, ""),
     moduleEditor: jspb.Message.getFieldWithDefault(msg, 9, ""),
-    metadata: (f = msg.getMetadata()) && proto_token_pb.SecurityToken.Metadata.toObject(includeInstance, f)
+    metadata: (f = msg.getMetadata()) && schema_token_pb.SecurityToken.Metadata.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -251,8 +251,8 @@ proto.transaction.DeployNewSecurityToken.deserializeBinaryFromReader = function(
       msg.setModuleEditor(value);
       break;
     case 10:
-      var value = new proto_token_pb.SecurityToken.Metadata;
-      reader.readMessage(value,proto_token_pb.SecurityToken.Metadata.deserializeBinaryFromReader);
+      var value = new schema_token_pb.SecurityToken.Metadata;
+      reader.readMessage(value,schema_token_pb.SecurityToken.Metadata.deserializeBinaryFromReader);
       msg.setMetadata(value);
       break;
     default:
@@ -352,7 +352,7 @@ proto.transaction.DeployNewSecurityToken.serializeBinaryToWriter = function(mess
     writer.writeMessage(
       10,
       f,
-      proto_token_pb.SecurityToken.Metadata.serializeBinaryToWriter
+      schema_token_pb.SecurityToken.Metadata.serializeBinaryToWriter
     );
   }
 };
@@ -526,7 +526,7 @@ proto.transaction.DeployNewSecurityToken.prototype.setModuleEditor = function(va
  */
 proto.transaction.DeployNewSecurityToken.prototype.getMetadata = function() {
   return /** @type{?proto.token.SecurityToken.Metadata} */ (
-    jspb.Message.getWrapperField(this, proto_token_pb.SecurityToken.Metadata, 10));
+    jspb.Message.getWrapperField(this, schema_token_pb.SecurityToken.Metadata, 10));
 };
 
 

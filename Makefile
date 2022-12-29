@@ -11,7 +11,7 @@ golang:
 	--go_opt=paths=source_relative \
 	--go-grpc_out=${OUT_DIR} \
 	--go-grpc_opt=paths=source_relative \
-	proto/*.proto
+	schema/*.proto
 
 
 js:
@@ -19,6 +19,6 @@ js:
 	--plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
 	--js_out="import_style=commonjs,binary:${OUT_DIR}" \
 	--ts_out="${OUT_DIR}" \
-	proto/*.proto
+	schema/*.proto
 
 core: golang js

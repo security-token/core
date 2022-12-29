@@ -1,5 +1,5 @@
 // package: token
-// file: proto/token.proto
+// file: schema/token.proto
 
 import * as jspb from "google-protobuf";
 

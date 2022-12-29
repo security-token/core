@@ -1,8 +1,8 @@
 // package: transaction
-// file: proto/transaction.proto
+// file: schema/transaction.proto
 
 import * as jspb from "google-protobuf";
-import * as proto_token_pb from "../proto/token_pb";
+import * as schema_token_pb from "../schema/token_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 export class DeployNewSecurityToken extends jspb.Message {
@@ -35,8 +35,8 @@ export class DeployNewSecurityToken extends jspb.Message {
 
   hasMetadata(): boolean;
   clearMetadata(): void;
-  getMetadata(): proto_token_pb.SecurityToken.Metadata | undefined;
-  setMetadata(value?: proto_token_pb.SecurityToken.Metadata): void;
+  getMetadata(): schema_token_pb.SecurityToken.Metadata | undefined;
+  setMetadata(value?: schema_token_pb.SecurityToken.Metadata): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DeployNewSecurityToken.AsObject;
@@ -59,7 +59,7 @@ export namespace DeployNewSecurityToken {
     issuer: string,
     redeemer: string,
     moduleEditor: string,
-    metadata?: proto_token_pb.SecurityToken.Metadata.AsObject,
+    metadata?: schema_token_pb.SecurityToken.Metadata.AsObject,
   }
 }
 

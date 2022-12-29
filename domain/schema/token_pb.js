@@ -1,4 +1,4 @@
-// source: proto/token.proto
+// source: schema/token.proto
 /**
  * @fileoverview
  * @enhanceable
