@@ -97,11 +97,12 @@ proto.token.SecurityToken.prototype.toObject = function(opt_includeInstance) {
  */
 proto.token.SecurityToken.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    symbol: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    granularity: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    cap: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    totalsupply: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    address: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    symbol: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    granularity: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    cap: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    totalsupply: jspb.Message.getFieldWithDefault(msg, 6, 0),
     metadata: (f = msg.getMetadata()) && proto.token.SecurityToken.Metadata.toObject(includeInstance, f)
   };
 
@@ -141,21 +142,25 @@ proto.token.SecurityToken.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setAddress(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSymbol(value);
+      msg.setName(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setGranularity(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSymbol(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setCap(value);
+      msg.setGranularity(value);
       break;
     case 5:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setCap(value);
+      break;
+    case 6:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setTotalsupply(value);
       break;
@@ -193,38 +198,45 @@ proto.token.SecurityToken.prototype.serializeBinary = function() {
  */
 proto.token.SecurityToken.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getName();
+  f = message.getAddress();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getSymbol();
+  f = message.getName();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getGranularity();
-  if (f !== 0) {
-    writer.writeUint64(
+  f = message.getSymbol();
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
   }
-  f = message.getCap();
+  f = message.getGranularity();
   if (f !== 0) {
     writer.writeUint64(
       4,
       f
     );
   }
-  f = message.getTotalsupply();
+  f = message.getCap();
   if (f !== 0) {
     writer.writeUint64(
       5,
+      f
+    );
+  }
+  f = message.getTotalsupply();
+  if (f !== 0) {
+    writer.writeUint64(
+      6,
       f
     );
   }
@@ -430,10 +442,10 @@ proto.token.SecurityToken.Metadata.prototype.setDescription = function(value) {
 
 
 /**
- * optional string name = 1;
+ * optional string address = 1;
  * @return {string}
  */
-proto.token.SecurityToken.prototype.getName = function() {
+proto.token.SecurityToken.prototype.getAddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -442,16 +454,16 @@ proto.token.SecurityToken.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.token.SecurityToken} returns this
  */
-proto.token.SecurityToken.prototype.setName = function(value) {
+proto.token.SecurityToken.prototype.setAddress = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string symbol = 2;
+ * optional string name = 2;
  * @return {string}
  */
-proto.token.SecurityToken.prototype.getSymbol = function() {
+proto.token.SecurityToken.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -460,34 +472,34 @@ proto.token.SecurityToken.prototype.getSymbol = function() {
  * @param {string} value
  * @return {!proto.token.SecurityToken} returns this
  */
-proto.token.SecurityToken.prototype.setSymbol = function(value) {
+proto.token.SecurityToken.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional uint64 granularity = 3;
+ * optional string symbol = 3;
+ * @return {string}
+ */
+proto.token.SecurityToken.prototype.getSymbol = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.token.SecurityToken} returns this
+ */
+proto.token.SecurityToken.prototype.setSymbol = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 granularity = 4;
  * @return {number}
  */
 proto.token.SecurityToken.prototype.getGranularity = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.token.SecurityToken} returns this
- */
-proto.token.SecurityToken.prototype.setGranularity = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
-};
-
-
-/**
- * optional uint64 cap = 4;
- * @return {number}
- */
-proto.token.SecurityToken.prototype.getCap = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -496,16 +508,16 @@ proto.token.SecurityToken.prototype.getCap = function() {
  * @param {number} value
  * @return {!proto.token.SecurityToken} returns this
  */
-proto.token.SecurityToken.prototype.setCap = function(value) {
+proto.token.SecurityToken.prototype.setGranularity = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
 /**
- * optional uint64 totalSupply = 5;
+ * optional uint64 cap = 5;
  * @return {number}
  */
-proto.token.SecurityToken.prototype.getTotalsupply = function() {
+proto.token.SecurityToken.prototype.getCap = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
@@ -514,8 +526,26 @@ proto.token.SecurityToken.prototype.getTotalsupply = function() {
  * @param {number} value
  * @return {!proto.token.SecurityToken} returns this
  */
-proto.token.SecurityToken.prototype.setTotalsupply = function(value) {
+proto.token.SecurityToken.prototype.setCap = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 totalSupply = 6;
+ * @return {number}
+ */
+proto.token.SecurityToken.prototype.getTotalsupply = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.token.SecurityToken} returns this
+ */
+proto.token.SecurityToken.prototype.setTotalsupply = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 

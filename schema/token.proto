@@ -1,6 +1,6 @@
 syntax = "proto3";
 package token;
-option go_package = "github.com/security-token-core/domain/proto";
+option go_package = "github.com/security-token/core/domain/schema";
 
 message SecurityToken {
     message Metadata {
@@ -9,10 +9,11 @@ message SecurityToken {
         string description = 3;
     }
 
-    string name = 1;
-    string symbol = 2;
-    uint64 granularity = 3;
-    uint64 cap = 4;
-    uint64 totalSupply = 5;
+    string address= 1;
+    string name = 2;
+    string symbol = 3;
+    uint64 granularity = 4;
+    uint64 cap = 5;
+    uint64 totalSupply = 6;
     Metadata metadata = 10;
 }

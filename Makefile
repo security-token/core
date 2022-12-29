@@ -21,4 +21,4 @@ js:
 	--ts_out="${OUT_DIR}" \
 	schema/*.proto
 
-core: golang js
+schema: golang js

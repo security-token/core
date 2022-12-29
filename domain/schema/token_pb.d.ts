@@ -4,6 +4,9 @@
 import * as jspb from "google-protobuf";
 
 export class SecurityToken extends jspb.Message {
+  getAddress(): string;
+  setAddress(value: string): void;
+
   getName(): string;
   setName(value: string): void;
 
@@ -36,6 +39,7 @@ export class SecurityToken extends jspb.Message {
 
 export namespace SecurityToken {
   export type AsObject = {
+    address: string,
     name: string,
     symbol: string,
     granularity: number,
