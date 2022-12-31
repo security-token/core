@@ -22,3 +22,9 @@ js:
 	schema/*.proto
 
 schema: golang js
+
+extract:
+	bash scripts/extract.sh
+
+interfaces: extract
+	bash scripts/interfaces.sh

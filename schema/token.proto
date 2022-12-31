@@ -17,3 +17,9 @@ message SecurityToken {
     uint64 totalSupply = 6;
     Metadata metadata = 10;
 }
+
+message Document {
+    string name = 1;
+    string uri = 2;
+    string hash = 3;
+}
