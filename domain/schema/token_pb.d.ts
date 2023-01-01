@@ -49,14 +49,11 @@ export namespace SecurityToken {
   }
 
   export class Metadata extends jspb.Message {
-    getIcon(): string;
-    setIcon(value: string): void;
+    getLogo(): string;
+    setLogo(value: string): void;
 
-    getBgimage(): string;
-    setBgimage(value: string): void;
-
-    getDescription(): string;
-    setDescription(value: string): void;
+    getIssuer(): string;
+    setIssuer(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Metadata.AsObject;
@@ -70,10 +67,45 @@ export namespace SecurityToken {
 
   export namespace Metadata {
     export type AsObject = {
-      icon: string,
-      bgimage: string,
-      description: string,
+      logo: string,
+      issuer: string,
     }
+  }
+}
+
+export class Issuer extends jspb.Message {
+  getAddress(): string;
+  setAddress(value: string): void;
+
+  getLogo(): string;
+  setLogo(value: string): void;
+
+  getBgimage(): string;
+  setBgimage(value: string): void;
+
+  getName(): string;
+  setName(value: string): void;
+
+  getDescription(): string;
+  setDescription(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Issuer.AsObject;
+  static toObject(includeInstance: boolean, msg: Issuer): Issuer.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: Issuer, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Issuer;
+  static deserializeBinaryFromReader(message: Issuer, reader: jspb.BinaryReader): Issuer;
+}
+
+export namespace Issuer {
+  export type AsObject = {
+    address: string,
+    logo: string,
+    bgimage: string,
+    name: string,
+    description: string,
   }
 }
 

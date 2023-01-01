@@ -4,18 +4,25 @@ option go_package = "github.com/security-token/core/domain/schema";
 
 message SecurityToken {
     message Metadata {
-        string icon = 1;
-        string bgImage = 2;
-        string description = 3;
+        string logo = 1;
     }
+    
+    string address = 1;
+    string issuer = 2;
+    string name = 3;
+    string symbol = 4;
+    uint64 granularity = 5;
+    uint64 cap = 6;
+    uint64 totalSupply = 7;
+    Metadata metadata = 8;
+}
 
-    string address= 1;
-    string name = 2;
-    string symbol = 3;
-    uint64 granularity = 4;
-    uint64 cap = 5;
-    uint64 totalSupply = 6;
-    Metadata metadata = 10;
+message Issuer {
+    string address=1;
+    string logo = 2;
+    string bgImage = 3;
+    string name = 4;
+    string description = 5;
 }
 
 message Document {
