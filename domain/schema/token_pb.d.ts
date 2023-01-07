@@ -2,10 +2,14 @@
 // file: schema/token.proto
 
 import * as jspb from "google-protobuf";
+import * as schema_common_pb from "../schema/common_pb";
 
 export class SecurityToken extends jspb.Message {
   getAddress(): string;
   setAddress(value: string): void;
+
+  getIssuer(): string;
+  setIssuer(value: string): void;
 
   getName(): string;
   setName(value: string): void;
@@ -40,6 +44,7 @@ export class SecurityToken extends jspb.Message {
 export namespace SecurityToken {
   export type AsObject = {
     address: string,
+    issuer: string,
     name: string,
     symbol: string,
     granularity: number,
@@ -51,9 +56,6 @@ export namespace SecurityToken {
   export class Metadata extends jspb.Message {
     getLogo(): string;
     setLogo(value: string): void;
-
-    getIssuer(): string;
-    setIssuer(value: string): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Metadata.AsObject;
@@ -68,7 +70,6 @@ export namespace SecurityToken {
   export namespace Metadata {
     export type AsObject = {
       logo: string,
-      issuer: string,
     }
   }
 }
@@ -134,6 +135,64 @@ export namespace Document {
     name: string,
     uri: string,
     hash: string,
+  }
+}
+
+export class Partition extends jspb.Message {
+  getId(): string;
+  setId(value: string): void;
+
+  clearModulesList(): void;
+  getModulesList(): Array<string>;
+  setModulesList(value: Array<string>): void;
+  addModules(value: string, index?: number): string;
+
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): Partition.Metadata | undefined;
+  setMetadata(value?: Partition.Metadata): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Partition.AsObject;
+  static toObject(includeInstance: boolean, msg: Partition): Partition.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: Partition, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Partition;
+  static deserializeBinaryFromReader(message: Partition, reader: jspb.BinaryReader): Partition;
+}
+
+export namespace Partition {
+  export type AsObject = {
+    id: string,
+    modulesList: Array<string>,
+    metadata?: Partition.Metadata.AsObject,
+  }
+
+  export class Metadata extends jspb.Message {
+    getName(): string;
+    setName(value: string): void;
+
+    clearPropertiesList(): void;
+    getPropertiesList(): Array<schema_common_pb.Property>;
+    setPropertiesList(value: Array<schema_common_pb.Property>): void;
+    addProperties(value?: schema_common_pb.Property, index?: number): schema_common_pb.Property;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Metadata.AsObject;
+    static toObject(includeInstance: boolean, msg: Metadata): Metadata.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Metadata, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Metadata;
+    static deserializeBinaryFromReader(message: Metadata, reader: jspb.BinaryReader): Metadata;
+  }
+
+  export namespace Metadata {
+    export type AsObject = {
+      name: string,
+      propertiesList: Array<schema_common_pb.Property.AsObject>,
+    }
   }
 }
 

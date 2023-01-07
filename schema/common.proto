@@ -1,0 +1,8 @@
+syntax = "proto3";
+package common;
+option go_package = "github.com/security-token/core/domain/schema";
+
+message Property {
+    string name = 1;
+    string value = 2;
+}

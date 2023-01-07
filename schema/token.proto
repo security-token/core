@@ -2,6 +2,8 @@ syntax = "proto3";
 package token;
 option go_package = "github.com/security-token/core/domain/schema";
 
+import "schema/common.proto";
+
 message SecurityToken {
     message Metadata {
         string logo = 1;
@@ -29,4 +31,15 @@ message Document {
     string name = 1;
     string uri = 2;
     string hash = 3;
+}
+
+message Partition {
+    message Metadata {
+        string name = 1;
+        repeated common.Property properties = 2;
+    };
+
+    string id = 1;
+    repeated string modules = 2;
+    Metadata metadata = 10;
 }
