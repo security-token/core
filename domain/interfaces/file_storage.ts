@@ -1,6 +1,7 @@
 export interface IFileStorage {
-  getFileUrl(filePath: string): Promise<string>;
-  readFile(filePath: string): Promise<File>;
+  storeText(text: string): Promise<string>;
+  readText(hash: string): Promise<string>;
 
   storeFile(file: File): Promise<string>;
+  readFile(hash: string): Promise<File>;
 }

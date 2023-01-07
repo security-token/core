@@ -2,10 +2,10 @@ import { SecurityToken, Issuer } from "../schema/token_pb";
 import { Account } from "../schema/account_pb";
 
 export interface ITokenHub {
-  getProject(address: string): Promise<SecurityToken.Metadata | undefined>;
+  getProject(address: string): Promise<SecurityToken.Metadata>;
   isCertifiedProject(address: string): Promise<boolean>;
 
-  getIssuer(address: string): Promise<Issuer | undefined>;
+  getIssuer(address: string): Promise<Issuer.Metadata>;
   isCertifiedIssuer(address: string): Promise<boolean>;
 
   getProjects(): Promise<string[]>;
@@ -13,7 +13,10 @@ export interface ITokenHub {
   removeProject(address: string): Promise<boolean>;
 
   getProjectAccounts(address: string): Promise<string[]>;
-  getProjectAccount(account: string): Promise<Account.Metadata | undefined>;
-  addProjectAccount(address: string, account: Account.Metadata): Promise<boolean>;
+  addProjectAccount(address: string, account: string): Promise<boolean>;
   removeProjectAccount(address: string, account: string): Promise<boolean>;
+  
+  getProjectAccount(account: string): Promise<Account.Metadata>;
+  setProjectAccount(account: string, data: Account.Metadata): Promise<boolean>;
+
 }

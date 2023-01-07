@@ -78,17 +78,10 @@ export class Issuer extends jspb.Message {
   getAddress(): string;
   setAddress(value: string): void;
 
-  getLogo(): string;
-  setLogo(value: string): void;
-
-  getBgimage(): string;
-  setBgimage(value: string): void;
-
-  getName(): string;
-  setName(value: string): void;
-
-  getDescription(): string;
-  setDescription(value: string): void;
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): Issuer.Metadata | undefined;
+  setMetadata(value?: Issuer.Metadata): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Issuer.AsObject;
@@ -103,10 +96,39 @@ export class Issuer extends jspb.Message {
 export namespace Issuer {
   export type AsObject = {
     address: string,
-    logo: string,
-    bgimage: string,
-    name: string,
-    description: string,
+    metadata?: Issuer.Metadata.AsObject,
+  }
+
+  export class Metadata extends jspb.Message {
+    getName(): string;
+    setName(value: string): void;
+
+    getLogo(): string;
+    setLogo(value: string): void;
+
+    getBgimage(): string;
+    setBgimage(value: string): void;
+
+    getDescription(): string;
+    setDescription(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Metadata.AsObject;
+    static toObject(includeInstance: boolean, msg: Metadata): Metadata.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Metadata, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Metadata;
+    static deserializeBinaryFromReader(message: Metadata, reader: jspb.BinaryReader): Metadata;
+  }
+
+  export namespace Metadata {
+    export type AsObject = {
+      name: string,
+      logo: string,
+      bgimage: string,
+      description: string,
+    }
   }
 }
 
@@ -119,6 +141,11 @@ export class Document extends jspb.Message {
 
   getHash(): string;
   setHash(value: string): void;
+
+  hasMetadata(): boolean;
+  clearMetadata(): void;
+  getMetadata(): Document.Metadata | undefined;
+  setMetadata(value?: Document.Metadata): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Document.AsObject;
@@ -135,6 +162,27 @@ export namespace Document {
     name: string,
     uri: string,
     hash: string,
+    metadata?: Document.Metadata.AsObject,
+  }
+
+  export class Metadata extends jspb.Message {
+    getIcon(): string;
+    setIcon(value: string): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Metadata.AsObject;
+    static toObject(includeInstance: boolean, msg: Metadata): Metadata.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Metadata, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Metadata;
+    static deserializeBinaryFromReader(message: Metadata, reader: jspb.BinaryReader): Metadata;
+  }
+
+  export namespace Metadata {
+    export type AsObject = {
+      icon: string,
+    }
   }
 }
 
