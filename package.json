@@ -1,6 +1,6 @@
 {
   "name": "security-token-core",
-  "version": "0.0.30",
+  "version": "0.0.33",
   "license": "MIT",
   "author": "Amaury Diaz <ad@micobo.com>",
   "dependencies": {

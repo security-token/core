@@ -2,15 +2,18 @@ import { SecurityToken, Issuer } from "../schema/token_pb";
 import { Account } from "../schema/account_pb";
 
 export interface ITokenHub {
-  getCertifiedHeader(address: string): Promise<SecurityToken.Metadata | undefined>;
+  getProject(address: string): Promise<SecurityToken.Metadata | undefined>;
+  isCertifiedProject(address: string): Promise<boolean>;
 
-  getIssuer(address: string): Promise<Issuer>;
+  getIssuer(address: string): Promise<Issuer | undefined>;
+  isCertifiedIssuer(address: string): Promise<boolean>;
 
-  isFavorite(address: string): Promise<boolean>;
-  getFavorites(): Promise<string[]>;
-  addFavorite(address: string): Promise<boolean>;
-  removeFavorite(address: string): Promise<boolean>;
+  getProjects(): Promise<string[]>;
+  addProject(address: string): Promise<boolean>;
+  removeProject(address: string): Promise<boolean>;
 
-  getAccounts(address: string): Promise<string[]>;
-  getAccount(account: string): Promise<Account>;
+  getProjectAccounts(address: string): Promise<string[]>;
+  getProjectAccount(account: string): Promise<Account.Metadata | undefined>;
+  addProjectAccount(address: string, account: Account.Metadata): Promise<boolean>;
+  removeProjectAccount(address: string, account: string): Promise<boolean>;
 }
