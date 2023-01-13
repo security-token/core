@@ -1,4 +1,6 @@
 export interface IFileStorage {
+  downloadLink(hash: string): string;
+
   storeText(text: string): Promise<string>;
   readText(hash: string): Promise<string>;
 

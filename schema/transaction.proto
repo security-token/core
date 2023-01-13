@@ -5,33 +5,33 @@ option go_package = "github.com/security-token/core/domain/schema";
 import "schema/token.proto";
 import "google/protobuf/timestamp.proto";
 
-/* factories/SecurityTokenFactory.sol */ 
-message DeployNewSecurityToken {
-    string name = 1;
-    string symbol = 2;
-    uint64 granularity = 3;
-    uint64 cap = 4;
-    string admin = 5;
-    string controller = 6;
-    string issuer = 7;
-    string redeemer = 8;
-    string module_editor = 9;
-
-    token.SecurityToken.Metadata metadata = 10;
-}
-
-message Transfer {
-    string recipient = 1;
-    uint64 amount = 2;
-}
-
-message IssueByPartition {
-    string partition = 1;
-    string recipient = 2;
-    uint64 amount = 3;
-}
-
 message Transaction {
+    /* factories/SecurityTokenFactory.sol */ 
+    message DeployNewSecurityToken {
+        string name = 1;
+        string symbol = 2;
+        uint64 granularity = 3;
+        uint64 cap = 4;
+        string admin = 5;
+        string controller = 6;
+        string issuer = 7;
+        string redeemer = 8;
+        string module_editor = 9;
+
+        token.SecurityToken.Metadata metadata = 10;
+    }
+
+    message Transfer {
+        string recipient = 1;
+        uint64 amount = 2;
+    }
+
+    message IssueByPartition {
+        string partition = 1;
+        string recipient = 2;
+        uint64 amount = 3;
+    }
+
     message Metadata {
         string hash = 1;
         google.protobuf.Timestamp date = 2;
