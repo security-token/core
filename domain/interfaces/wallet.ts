@@ -6,6 +6,6 @@ export interface IWallet {
   getWallet(): Promise<Wallet>;
   setWallet(wallet: Wallet): Promise<boolean>;
 
-  getCertifiedIssuer(address: string): Promise<Issuer.Metadata | null>;
-  getCertifiedProject(address: string): Promise<SecurityToken.Metadata | null>;
+  getCertifiedIssuer(address: string): Promise<Issuer.Metadata | undefined>;
+  getCertifiedProject(address: string): Promise<SecurityToken.Metadata | undefined>;
 }
