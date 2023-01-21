@@ -1,4 +1,4 @@
-// package: transaction
+// package: account
 // file: schema/account.proto
 
 import * as jspb from "google-protobuf";
