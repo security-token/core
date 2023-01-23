@@ -133,6 +133,9 @@ export namespace Issuer {
 }
 
 export class Document extends jspb.Message {
+  getToken(): string;
+  setToken(value: string): void;
+
   getName(): string;
   setName(value: string): void;
 
@@ -159,6 +162,7 @@ export class Document extends jspb.Message {
 
 export namespace Document {
   export type AsObject = {
+    token: string,
     name: string,
     uri: string,
     hash: string,
@@ -187,6 +191,9 @@ export namespace Document {
 }
 
 export class Partition extends jspb.Message {
+  getToken(): string;
+  setToken(value: string): void;
+
   getId(): string;
   setId(value: string): void;
 
@@ -212,6 +219,7 @@ export class Partition extends jspb.Message {
 
 export namespace Partition {
   export type AsObject = {
+    token: string,
     id: string,
     modulesList: Array<string>,
     metadata?: Partition.Metadata.AsObject,

@@ -1123,9 +1123,10 @@ proto.token.Document.prototype.toObject = function(opt_includeInstance) {
  */
 proto.token.Document.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    uri: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    hash: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    uri: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    hash: jspb.Message.getFieldWithDefault(msg, 4, ""),
     metadata: (f = msg.getMetadata()) && proto.token.Document.Metadata.toObject(includeInstance, f)
   };
 
@@ -1165,13 +1166,17 @@ proto.token.Document.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setToken(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUri(value);
+      msg.setName(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUri(value);
+      break;
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setHash(value);
       break;
@@ -1209,24 +1214,31 @@ proto.token.Document.prototype.serializeBinary = function() {
  */
 proto.token.Document.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getName();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getUri();
+  f = message.getName();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getHash();
+  f = message.getUri();
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getHash();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -1372,10 +1384,10 @@ proto.token.Document.Metadata.prototype.setIcon = function(value) {
 
 
 /**
- * optional string name = 1;
+ * optional string token = 1;
  * @return {string}
  */
-proto.token.Document.prototype.getName = function() {
+proto.token.Document.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -1384,16 +1396,16 @@ proto.token.Document.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.token.Document} returns this
  */
-proto.token.Document.prototype.setName = function(value) {
+proto.token.Document.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string uri = 2;
+ * optional string name = 2;
  * @return {string}
  */
-proto.token.Document.prototype.getUri = function() {
+proto.token.Document.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1402,16 +1414,16 @@ proto.token.Document.prototype.getUri = function() {
  * @param {string} value
  * @return {!proto.token.Document} returns this
  */
-proto.token.Document.prototype.setUri = function(value) {
+proto.token.Document.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string hash = 3;
+ * optional string uri = 3;
  * @return {string}
  */
-proto.token.Document.prototype.getHash = function() {
+proto.token.Document.prototype.getUri = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1420,8 +1432,26 @@ proto.token.Document.prototype.getHash = function() {
  * @param {string} value
  * @return {!proto.token.Document} returns this
  */
-proto.token.Document.prototype.setHash = function(value) {
+proto.token.Document.prototype.setUri = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string hash = 4;
+ * @return {string}
+ */
+proto.token.Document.prototype.getHash = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.token.Document} returns this
+ */
+proto.token.Document.prototype.setHash = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -1468,7 +1498,7 @@ proto.token.Document.prototype.hasMetadata = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.token.Partition.repeatedFields_ = [2];
+proto.token.Partition.repeatedFields_ = [3];
 
 
 
@@ -1501,8 +1531,9 @@ proto.token.Partition.prototype.toObject = function(opt_includeInstance) {
  */
 proto.token.Partition.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    modulesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    token: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    modulesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     metadata: (f = msg.getMetadata()) && proto.token.Partition.Metadata.toObject(includeInstance, f)
   };
 
@@ -1542,9 +1573,13 @@ proto.token.Partition.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setId(value);
+      msg.setToken(value);
       break;
     case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.addModules(value);
       break;
@@ -1582,17 +1617,24 @@ proto.token.Partition.prototype.serializeBinary = function() {
  */
 proto.token.Partition.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = message.getToken();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
   f = message.getModulesList();
   if (f.length > 0) {
     writer.writeRepeatedString(
-      2,
+      3,
       f
     );
   }
@@ -1798,10 +1840,10 @@ proto.token.Partition.Metadata.prototype.clearPropertiesList = function() {
 
 
 /**
- * optional string id = 1;
+ * optional string token = 1;
  * @return {string}
  */
-proto.token.Partition.prototype.getId = function() {
+proto.token.Partition.prototype.getToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -1810,17 +1852,35 @@ proto.token.Partition.prototype.getId = function() {
  * @param {string} value
  * @return {!proto.token.Partition} returns this
  */
-proto.token.Partition.prototype.setId = function(value) {
+proto.token.Partition.prototype.setToken = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * repeated string modules = 2;
+ * optional string id = 2;
+ * @return {string}
+ */
+proto.token.Partition.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.token.Partition} returns this
+ */
+proto.token.Partition.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated string modules = 3;
  * @return {!Array<string>}
  */
 proto.token.Partition.prototype.getModulesList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
@@ -1829,7 +1889,7 @@ proto.token.Partition.prototype.getModulesList = function() {
  * @return {!proto.token.Partition} returns this
  */
 proto.token.Partition.prototype.setModulesList = function(value) {
-  return jspb.Message.setField(this, 2, value || []);
+  return jspb.Message.setField(this, 3, value || []);
 };
 
 
@@ -1839,7 +1899,7 @@ proto.token.Partition.prototype.setModulesList = function(value) {
  * @return {!proto.token.Partition} returns this
  */
 proto.token.Partition.prototype.addModules = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 
