@@ -76,7 +76,8 @@ proto.common.Property.prototype.toObject = function(opt_includeInstance) {
 proto.common.Property.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    value: jspb.Message.getFieldWithDefault(msg, 2, "")
+    value: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    unit: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -121,6 +122,10 @@ proto.common.Property.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setValue(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUnit(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -164,6 +169,13 @@ proto.common.Property.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getUnit();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -200,6 +212,24 @@ proto.common.Property.prototype.getValue = function() {
  */
 proto.common.Property.prototype.setValue = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string unit = 3;
+ * @return {string}
+ */
+proto.common.Property.prototype.getUnit = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.common.Property} returns this
+ */
+proto.common.Property.prototype.setUnit = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

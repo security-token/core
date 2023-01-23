@@ -10,6 +10,9 @@ export class Property extends jspb.Message {
   getValue(): string;
   setValue(value: string): void;
 
+  getUnit(): string;
+  setUnit(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Property.AsObject;
   static toObject(includeInstance: boolean, msg: Property): Property.AsObject;
@@ -24,6 +27,7 @@ export namespace Property {
   export type AsObject = {
     name: string,
     value: string,
+    unit: string,
   }
 }
 
