@@ -4,6 +4,7 @@ option go_package = "github.com/security-token/core/domain/schema";
 
 import "schema/account.proto";
 import "schema/token.proto";
+import "schema/transaction.proto";
 
 message Wallet {
     message Project {
@@ -11,7 +12,10 @@ message Wallet {
         map<string,token.Partition.Metadata> partitions = 2;
         map<string,token.Document.Metadata> documents = 3;
         map<string,account.Account.Metadata> accounts = 4;
+        repeated transaction.Transaction transactions = 5;
     }
 
-    map<string,Project> projects = 1;
+    string account = 1;
+    string networkId = 2;
+    map<string,Project> projects = 3;
 }

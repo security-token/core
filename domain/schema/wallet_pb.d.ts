@@ -4,8 +4,15 @@
 import * as jspb from "google-protobuf";
 import * as schema_account_pb from "../schema/account_pb";
 import * as schema_token_pb from "../schema/token_pb";
+import * as schema_transaction_pb from "../schema/transaction_pb";
 
 export class Wallet extends jspb.Message {
+  getAccount(): string;
+  setAccount(value: string): void;
+
+  getNetworkid(): string;
+  setNetworkid(value: string): void;
+
   getProjectsMap(): jspb.Map<string, Wallet.Project>;
   clearProjectsMap(): void;
   serializeBinary(): Uint8Array;
@@ -20,6 +27,8 @@ export class Wallet extends jspb.Message {
 
 export namespace Wallet {
   export type AsObject = {
+    account: string,
+    networkid: string,
     projectsMap: Array<[string, Wallet.Project.AsObject]>,
   }
 
@@ -35,6 +44,11 @@ export namespace Wallet {
     clearDocumentsMap(): void;
     getAccountsMap(): jspb.Map<string, schema_account_pb.Account.Metadata>;
     clearAccountsMap(): void;
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<schema_transaction_pb.Transaction>;
+    setTransactionsList(value: Array<schema_transaction_pb.Transaction>): void;
+    addTransactions(value?: schema_transaction_pb.Transaction, index?: number): schema_transaction_pb.Transaction;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Project.AsObject;
     static toObject(includeInstance: boolean, msg: Project): Project.AsObject;
@@ -51,6 +65,7 @@ export namespace Wallet {
       partitionsMap: Array<[string, schema_token_pb.Partition.Metadata.AsObject]>,
       documentsMap: Array<[string, schema_token_pb.Document.Metadata.AsObject]>,
       accountsMap: Array<[string, schema_account_pb.Account.Metadata.AsObject]>,
+      transactionsList: Array<schema_transaction_pb.Transaction.AsObject>,
     }
   }
 }

@@ -25,6 +25,8 @@ var schema_account_pb = require('../schema/account_pb.js');
 goog.object.extend(proto, schema_account_pb);
 var schema_token_pb = require('../schema/token_pb.js');
 goog.object.extend(proto, schema_token_pb);
+var schema_transaction_pb = require('../schema/transaction_pb.js');
+goog.object.extend(proto, schema_transaction_pb);
 goog.exportSymbol('proto.wallet.Wallet', null, global);
 goog.exportSymbol('proto.wallet.Wallet.Project', null, global);
 /**
@@ -59,7 +61,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.wallet.Wallet.Project = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.wallet.Wallet.Project.repeatedFields_, null);
 };
 goog.inherits(proto.wallet.Wallet.Project, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -101,6 +103,8 @@ proto.wallet.Wallet.prototype.toObject = function(opt_includeInstance) {
  */
 proto.wallet.Wallet.toObject = function(includeInstance, msg) {
   var f, obj = {
+    account: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    networkid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     projectsMap: (f = msg.getProjectsMap()) ? f.toObject(includeInstance, proto.wallet.Wallet.Project.toObject) : []
   };
 
@@ -139,6 +143,14 @@ proto.wallet.Wallet.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccount(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNetworkid(value);
+      break;
+    case 3:
       var value = msg.getProjectsMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.wallet.Wallet.Project.deserializeBinaryFromReader, "", new proto.wallet.Wallet.Project());
@@ -173,13 +185,34 @@ proto.wallet.Wallet.prototype.serializeBinary = function() {
  */
 proto.wallet.Wallet.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getAccount();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getNetworkid();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
   f = message.getProjectsMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(1, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.wallet.Wallet.Project.serializeBinaryToWriter);
+    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.wallet.Wallet.Project.serializeBinaryToWriter);
   }
 };
 
 
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.wallet.Wallet.Project.repeatedFields_ = [5];
 
 
 
@@ -215,7 +248,9 @@ proto.wallet.Wallet.Project.toObject = function(includeInstance, msg) {
     token: (f = msg.getToken()) && schema_token_pb.SecurityToken.Metadata.toObject(includeInstance, f),
     partitionsMap: (f = msg.getPartitionsMap()) ? f.toObject(includeInstance, proto.token.Partition.Metadata.toObject) : [],
     documentsMap: (f = msg.getDocumentsMap()) ? f.toObject(includeInstance, proto.token.Document.Metadata.toObject) : [],
-    accountsMap: (f = msg.getAccountsMap()) ? f.toObject(includeInstance, proto.account.Account.Metadata.toObject) : []
+    accountsMap: (f = msg.getAccountsMap()) ? f.toObject(includeInstance, proto.account.Account.Metadata.toObject) : [],
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    schema_transaction_pb.Transaction.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -275,6 +310,11 @@ proto.wallet.Wallet.Project.deserializeBinaryFromReader = function(msg, reader) 
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.account.Account.Metadata.deserializeBinaryFromReader, "", new proto.account.Account.Metadata());
          });
       break;
+    case 5:
+      var value = new schema_transaction_pb.Transaction;
+      reader.readMessage(value,schema_transaction_pb.Transaction.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -323,6 +363,14 @@ proto.wallet.Wallet.Project.serializeBinaryToWriter = function(message, writer) 
   f = message.getAccountsMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(4, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.account.Account.Metadata.serializeBinaryToWriter);
+  }
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      5,
+      f,
+      schema_transaction_pb.Transaction.serializeBinaryToWriter
+    );
   }
 };
 
@@ -431,14 +479,88 @@ proto.wallet.Wallet.Project.prototype.clearAccountsMap = function() {
 
 
 /**
- * map<string, Project> projects = 1;
+ * repeated transaction.Transaction transactions = 5;
+ * @return {!Array<!proto.transaction.Transaction>}
+ */
+proto.wallet.Wallet.Project.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.transaction.Transaction>} */ (
+    jspb.Message.getRepeatedWrapperField(this, schema_transaction_pb.Transaction, 5));
+};
+
+
+/**
+ * @param {!Array<!proto.transaction.Transaction>} value
+ * @return {!proto.wallet.Wallet.Project} returns this
+*/
+proto.wallet.Wallet.Project.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+};
+
+
+/**
+ * @param {!proto.transaction.Transaction=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.transaction.Transaction}
+ */
+proto.wallet.Wallet.Project.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.transaction.Transaction, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.wallet.Wallet.Project} returns this
+ */
+proto.wallet.Wallet.Project.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+/**
+ * optional string account = 1;
+ * @return {string}
+ */
+proto.wallet.Wallet.prototype.getAccount = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.wallet.Wallet} returns this
+ */
+proto.wallet.Wallet.prototype.setAccount = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string networkId = 2;
+ * @return {string}
+ */
+proto.wallet.Wallet.prototype.getNetworkid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.wallet.Wallet} returns this
+ */
+proto.wallet.Wallet.prototype.setNetworkid = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * map<string, Project> projects = 3;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,!proto.wallet.Wallet.Project>}
  */
 proto.wallet.Wallet.prototype.getProjectsMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,!proto.wallet.Wallet.Project>} */ (
-      jspb.Message.getMapField(this, 1, opt_noLazyCreate,
+      jspb.Message.getMapField(this, 3, opt_noLazyCreate,
       proto.wallet.Wallet.Project));
 };
 
