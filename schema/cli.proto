@@ -5,7 +5,7 @@ option go_package = "github.com/security-token/core/domain/schema";
 import "schema/token.proto";
 
 message Command {
-    message StoreProject {
+    message ShareProject {
         string address = 1;
         token.SecurityToken.Metadata metadata = 2;
     }
@@ -13,6 +13,6 @@ message Command {
     string networkId = 1;
 
     oneof data {
-        StoreProject storeProject = 2;
+        ShareProject shareProject = 2;
     }
 }
