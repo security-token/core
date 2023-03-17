@@ -1,6 +1,6 @@
 RELEASE_VERSION=v$(shell cat package.json | jq --raw-output .version)
  
-TARGET_BRANCH=dev
+TARGET_BRANCH=master
 
 publish:
 	@npm publish
