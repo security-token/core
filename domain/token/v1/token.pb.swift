@@ -156,7 +156,7 @@ struct Token_V1_Partition {
 
   var token: String = String()
 
-  var id: String = String()
+  var id: Data = Data()
 
   var modules: [String] = []
 
@@ -515,7 +515,7 @@ extension Token_V1_Partition: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.token) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.id) }()
       case 3: try { try decoder.decodeRepeatedStringField(value: &self.modules) }()
       case 10: try { try decoder.decodeSingularMessageField(value: &self._metadata) }()
       default: break
@@ -532,7 +532,7 @@ extension Token_V1_Partition: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       try visitor.visitSingularStringField(value: self.token, fieldNumber: 1)
     }
     if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 2)
+      try visitor.visitSingularBytesField(value: self.id, fieldNumber: 2)
     }
     if !self.modules.isEmpty {
       try visitor.visitRepeatedStringField(value: self.modules, fieldNumber: 3)

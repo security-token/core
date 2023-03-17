@@ -236,9 +236,9 @@ export declare class Partition extends Message<Partition> {
   token: string;
 
   /**
-   * @generated from field: string id = 2;
+   * @generated from field: bytes id = 2;
    */
-  id: string;
+  id: Uint8Array;
 
   /**
    * @generated from field: repeated string modules = 3;

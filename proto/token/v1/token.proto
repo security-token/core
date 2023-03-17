@@ -54,7 +54,7 @@ message Partition {
 
   string token = 1;
 
-  string id = 2;
+  bytes id = 2;
   repeated string modules = 3;
   Metadata metadata = 10;
 }

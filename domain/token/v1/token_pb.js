@@ -91,7 +91,7 @@ export const Partition = proto3.makeMessageType(
   "token.v1.Partition",
   () => [
     { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "id", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
     { no: 3, name: "modules", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 10, name: "metadata", kind: "message", T: Partition_Metadata },
   ],
