@@ -1,7 +1,0 @@
-syntax = "proto3";
-package module;
-option go_package = "github.com/security-token/core/domain/schema";
-
-message Module {
-    
-}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package account.v1;
+
+option go_package = "github.com/security-token/core/domain/account/v1;account";
+
+message Account {
+  message Metadata {
+    string name = 1;
+    string avatar = 2;
+  }
+
+  string address = 1;
+  repeated string roles = 2;
+
+  Metadata metadata = 10;
+}

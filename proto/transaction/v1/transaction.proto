@@ -1,0 +1,347 @@
+syntax = "proto3";
+package transaction.v1;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "token/v1/token.proto";
+
+option go_package = "github.com/security-token/core/domain/transaction/v1;transaction";
+
+message Transaction {
+  /* factories/SecurityTokenFactory.sol */
+
+  message SecurityTokenFactory {
+    message DeployNewSecurityToken {
+      string name = 1;
+      string symbol = 2;
+      uint64 granularity = 3;
+      uint64 cap = 4;
+      string admin = 5;
+      string controller = 6;
+      string issuer = 7;
+      string redeemer = 8;
+      string module_editor = 9;
+
+      token.v1.SecurityToken.Metadata metadata = 10;
+    }
+  }
+
+  /* contracts/token/SecurityToken.sol */
+
+  message SecurityToken {
+    message BulkIssueByPartition {
+      bytes partition = 1;
+      repeated string token_holders = 2;
+      repeated uint64 values = 3;
+      bytes data = 4;
+    }
+
+    message SetDocument {
+      bytes document_name = 1;
+      string uri = 2;
+      bytes document_hash = 3;
+    }
+
+    message IssueByPartition {
+      bytes partition = 1;
+      string recipient = 2;
+      uint64 amount = 3;
+    }
+
+    message RedeemByPartition {
+      bytes partition = 1;
+      uint64 value = 2;
+      bytes data = 3;
+    }
+
+    message OperatorRedeemByPartition {
+      bytes partition = 1;
+      string token_holder = 2;
+      uint64 value = 3;
+      bytes data = 4;
+      bytes operator_data = 5;
+    }
+
+    message RenounceControl {}
+
+    message RenounceIssuance {}
+  }
+
+  /* contracts/token/Pausable.sol */
+
+  message Pausable {
+    message Pause {}
+
+    message Unpause {}
+  }
+
+  /* contracts/token/Ownable.sol */
+
+  message Ownable {
+    message TransferOwnership {
+      string new_owner = 1;
+    }
+  }
+
+  /* contracts/token/ERC1400Raw.sol */
+
+  message ERC1400Raw {
+    message AuthorizeOperator {
+      string operator = 1;
+    }
+
+    message RevokeOperator {
+      string operator = 1;
+    }
+  }
+
+  /* contracts/token/ERC1400Partition.sol */
+
+  message ERC1400Partition {
+    message TransferByPartition {
+      bytes partition = 1;
+      string to = 2;
+      uint64 value = 3;
+      bytes calldata = 4;
+    }
+
+    message OperatorTransferByPartition {
+      bytes partition = 1;
+      string from = 2;
+      string to = 3;
+      uint64 value = 4;
+      bytes data = 5;
+      bytes operator_data = 6;
+    }
+
+    message AuthorizeOperatorByPartition {
+      bytes partition = 1;
+      string operator = 2;
+    }
+
+    message RevokeOperatorByPartition {
+      bytes partition = 1;
+      string operator = 2;
+    }
+
+    message TransferWithData {
+      string to = 1;
+      uint64 value = 2;
+      bytes data = 3;
+    }
+
+    message TransferFromWithData {
+      string from = 1;
+      string to = 2;
+      uint64 value = 3;
+      bytes data = 4;
+      bytes operator_data = 5;
+    }
+  }
+
+  /* contracts/token/ERC1400ERC20.sol */
+
+  message ERC1400ERC20 {
+    message Transfer {
+      string to = 1;
+      uint64 value = 2;
+    }
+
+    message Approve {
+      string spender = 1;
+      uint64 value = 2;
+    }
+
+    message TransferFrom {
+      string from = 1;
+      string to = 2;
+      uint64 value = 3;
+    }
+  }
+
+  /* contracts/token/ERC1400Capped.sol */
+
+  message ERC1400Capped {
+    message SetCap {
+      uint64 new_cap = 1;
+    }
+  }
+
+  /* contracts/token/Constrainable.sol */
+
+  message Constrainable {
+    message SetModulesByPartition {
+      bytes partition = 1;
+      repeated string new_modules = 2;
+    }
+  }
+
+  /* contracts/token/Administrable.sol */
+
+  message Administrable {
+    message AddRole {
+      bytes role = 1;
+      string account = 2;
+    }
+
+    message BulkAddRole {
+      repeated bytes roles = 1;
+      repeated string accounts = 2;
+    }
+
+    message RemoveRole {
+      bytes role = 1;
+      string account = 2;
+    }
+
+    message RenounceRole {
+      bytes role = 1;
+    }
+  }
+
+  /* contracts/constraints/SpendingLimitsConstraintModule.sol */
+
+  message SpendingLimitsConstraintModule {
+    message DeploySpendingLimitsConstraintModule {
+      string token_address = 1;
+    }
+
+    message AddTimelock {
+      google.protobuf.Duration period_length = 1;
+      uint64 amount_allowed = 2;
+    }
+
+    message SetTimelock {
+      uint64 index = 1;
+      google.protobuf.Duration period_length = 2;
+      uint64 amount_allowed = 3;
+    }
+
+    message DeleteTimelock {
+      uint64 index = 1;
+    }
+  }
+
+  /* contracts/constraints/TimeLockConstraintModule.sol */
+
+  message TimeLockConstraintModule {
+    message DeployTimeLockConstraintModule {
+      string token_address = 1;
+    }
+
+    message EditAmountTimeLock {
+      string account = 1;
+      google.protobuf.Timestamp time = 2;
+      uint64 amount = 3;
+    }
+
+    message EditAccountTimeLock {
+      string account = 1;
+      google.protobuf.Timestamp time = 2;
+    }
+
+    message EditTimeLock {
+      google.protobuf.Timestamp time = 1;
+    }
+  }
+
+  /* contracts/constraints/VestingPeriodConstraintModule.sol */
+
+  message VestingPeriodConstraintModule {
+    message DeployVestingPeriodConstraintModule {
+      string token_address = 1;
+    }
+
+    message SetVestingOptions {
+      google.protobuf.Timestamp vesting_start = 1;
+      uint64 vested_fraction_after_start = 2;
+      uint64 vesting_ratio = 3;
+    }
+  }
+
+  /* contracts/constraints/WhitelistConstraintModule.sol */
+
+  message WhitelistConstraintModule {
+    message DeployWhitelistConstraintModule {
+      string token_address = 1;
+    }
+
+    message EditWhitelist {
+      string account = 1;
+      bool whitelisted = 2;
+    }
+
+    message BulkEditWhitelist {
+      repeated string accounts = 1;
+      bool whitelisted = 2;
+    }
+  }
+
+  /* Metadata */
+  message Metadata {
+    string hash = 1;
+    google.protobuf.Timestamp date = 2;
+    string reverted = 3;
+  }
+
+  optional Metadata metadata = 1;
+  string contract = 2;
+  uint32 network = 3;
+
+  oneof data {
+    SecurityTokenFactory.DeployNewSecurityToken deploy_new_security_token = 4;
+
+    SecurityToken.BulkIssueByPartition bulk_issue_by_partition = 5;
+    SecurityToken.SetDocument set_document = 6;
+    SecurityToken.IssueByPartition issue_by_partition = 7;
+    SecurityToken.RedeemByPartition redeem_by_partition = 8;
+    SecurityToken.OperatorRedeemByPartition operator_redeem_by_partition = 9;
+    SecurityToken.RenounceControl renounce_control = 10;
+    SecurityToken.RenounceIssuance renounce_issuance = 11;
+
+    Pausable.Pause pause = 12;
+    Pausable.Unpause unpause = 13;
+
+    Ownable.TransferOwnership transfer_ownership = 14;
+
+    ERC1400Raw.AuthorizeOperator authorize_operator = 15;
+    ERC1400Raw.RevokeOperator revoke_operator = 16;
+
+    ERC1400Partition.TransferByPartition transfer_by_partition = 17;
+    ERC1400Partition.OperatorTransferByPartition operator_transfer_by_partition = 18;
+    ERC1400Partition.AuthorizeOperatorByPartition authorize_operator_by_partition = 19;
+    ERC1400Partition.RevokeOperatorByPartition revoke_operator_by_partition = 20;
+    ERC1400Partition.TransferWithData transfer_with_data = 21;
+    ERC1400Partition.TransferFromWithData transfer_from_with_data = 22;
+
+    ERC1400ERC20.Transfer transfer = 23;
+    ERC1400ERC20.Approve approve = 24;
+    ERC1400ERC20.TransferFrom transfer_from = 25;
+
+    ERC1400Capped.SetCap set_cap = 26;
+
+    Constrainable.SetModulesByPartition set_modules_by_partition = 27;
+
+    Administrable.AddRole add_role = 28;
+    Administrable.BulkAddRole bulk_add_role = 29;
+    Administrable.RemoveRole remove_role = 30;
+    Administrable.RenounceRole renounce_role = 31;
+
+    SpendingLimitsConstraintModule.DeploySpendingLimitsConstraintModule deploy_spending_limits_constraint_module = 32;
+    SpendingLimitsConstraintModule.AddTimelock add_timelock = 33;
+    SpendingLimitsConstraintModule.SetTimelock set_timelock = 34;
+    SpendingLimitsConstraintModule.DeleteTimelock delete_timelock = 35;
+
+    TimeLockConstraintModule.DeployTimeLockConstraintModule deploy_time_lock_constraint_module = 36;
+    TimeLockConstraintModule.EditAmountTimeLock edit_amount_time_lock = 37;
+    TimeLockConstraintModule.EditAccountTimeLock edit_account_time_lock = 38;
+    TimeLockConstraintModule.EditTimeLock edit_time_lock = 39;
+
+    VestingPeriodConstraintModule.DeployVestingPeriodConstraintModule deploy_vesting_period_constraint_module = 40;
+    VestingPeriodConstraintModule.SetVestingOptions set_vesting_options = 41;
+
+    WhitelistConstraintModule.DeployWhitelistConstraintModule deploy_whitelist_constraint_module = 42;
+    WhitelistConstraintModule.EditWhitelist edit_whitelist = 43;
+    WhitelistConstraintModule.BulkEditWhitelist bulk_edit_whitelist = 44;
+  }
+}

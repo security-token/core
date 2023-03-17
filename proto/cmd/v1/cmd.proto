@@ -1,0 +1,19 @@
+syntax = "proto3";
+package cmd.v1;
+
+import "token/v1/token.proto";
+
+option go_package = "github.com/security-token/core/domain/cmd/v1;cmd";
+
+message Command {
+  message ShareProject {
+    string address = 1;
+    token.v1.SecurityToken.Metadata metadata = 2;
+  }
+
+  string network_id = 1;
+
+  oneof data {
+    ShareProject share_project = 2;
+  }
+}

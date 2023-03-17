@@ -1,0 +1,60 @@
+syntax = "proto3";
+package token.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/security-token/core/domain/token/v1;token";
+
+message SecurityToken {
+  message Metadata {
+    string logo = 1;
+  }
+
+  string address = 1;
+  string issuer = 2;
+  string name = 3;
+  string symbol = 4;
+  uint64 granularity = 5;
+  uint64 cap = 6;
+  uint64 total_supply = 7;
+
+  Metadata metadata = 10;
+}
+
+message Issuer {
+  message Metadata {
+    string name = 1;
+    string logo = 2;
+    string bg_image = 3;
+    string description = 4;
+  }
+
+  string address = 1;
+  Metadata metadata = 10;
+}
+
+message Document {
+  message Metadata {
+    string icon = 1;
+  }
+
+  string token = 1;
+
+  string name = 2;
+  string uri = 3;
+  string hash = 4;
+  Metadata metadata = 10;
+}
+
+message Partition {
+  message Metadata {
+    string name = 1;
+    repeated common.v1.Property properties = 2;
+  }
+
+  string token = 1;
+
+  string id = 2;
+  repeated string modules = 3;
+  Metadata metadata = 10;
+}
