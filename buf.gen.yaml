@@ -18,7 +18,3 @@ plugins:
     opt: paths=source_relative
   - plugin: buf.build/grpc-ecosystem/openapiv2
     out: domain
-  - plugin: buf.build/bufbuild/es
-    out: domain
-  - plugin: buf.build/apple/swift
-    out: domain
