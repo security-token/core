@@ -58,3 +58,14 @@ message Partition {
   repeated string modules = 3;
   Metadata metadata = 10;
 }
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ADMIN = 1;
+  ROLE_ISSUER = 2;
+  ROLE_REDEEMER = 3;
+  ROLE_CONTROLLER = 4;
+  ROLE_MODULE_EDITOR = 5;
+
+  ROLE_WHITELIST_EDITOR = 6;
+}
