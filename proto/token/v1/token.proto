@@ -59,13 +59,37 @@ message Partition {
   Metadata metadata = 10;
 }
 
+message Module {
+  message Whitelist {}
+  message Blacklist {}
+  message Timelock {}
+  message SpendingLimit {}
+  message VestingPeriod {}
+
+  string address = 1;
+  
+  oneof data {
+    Whitelist whitelist = 2;
+    Blacklist blacklist = 3;
+    Timelock timelock = 4;
+    SpendingLimit spending_limit = 5;
+    VestingPeriod vesting_period = 6;
+  }
+}
+
 enum Role {
   ROLE_UNSPECIFIED = 0;
   ROLE_ADMIN = 1;
-  ROLE_ISSUER = 2;
-  ROLE_REDEEMER = 3;
-  ROLE_CONTROLLER = 4;
-  ROLE_MODULE_EDITOR = 5;
-
-  ROLE_WHITELIST_EDITOR = 6;
+  ROLE_CONTROLLER = 2;
+  ROLE_ISSUER = 3;
+  ROLE_PAUSER = 4;
+  ROLE_REDEEMER = 5;
+  ROLE_CAP_EDITOR = 6;
+  ROLE_MODULE_EDITOR = 7;
+  ROLE_DOCUMENT_EDITOR = 8;
+  ROLE_WHITELIST_EDITOR = 9;
+  ROLE_TIME_LOCK_EDITOR = 10;
+  ROLE_SPENDING_LIMITS_EDITOR = 11;
+  ROLE_VESTING_PERIOD_EDITOR = 12;
+  ROLE_GSN_CONTROLLER = 13;
 }

@@ -24,34 +24,55 @@ const (
 type Role int32
 
 const (
-	Role_ROLE_UNSPECIFIED      Role = 0
-	Role_ROLE_ADMIN            Role = 1
-	Role_ROLE_ISSUER           Role = 2
-	Role_ROLE_REDEEMER         Role = 3
-	Role_ROLE_CONTROLLER       Role = 4
-	Role_ROLE_MODULE_EDITOR    Role = 5
-	Role_ROLE_WHITELIST_EDITOR Role = 6
+	Role_ROLE_UNSPECIFIED            Role = 0
+	Role_ROLE_ADMIN                  Role = 1
+	Role_ROLE_CONTROLLER             Role = 2
+	Role_ROLE_ISSUER                 Role = 3
+	Role_ROLE_PAUSER                 Role = 4
+	Role_ROLE_REDEEMER               Role = 5
+	Role_ROLE_CAP_EDITOR             Role = 6
+	Role_ROLE_MODULE_EDITOR          Role = 7
+	Role_ROLE_DOCUMENT_EDITOR        Role = 8
+	Role_ROLE_WHITELIST_EDITOR       Role = 9
+	Role_ROLE_TIME_LOCK_EDITOR       Role = 10
+	Role_ROLE_SPENDING_LIMITS_EDITOR Role = 11
+	Role_ROLE_VESTING_PERIOD_EDITOR  Role = 12
+	Role_ROLE_GSN_CONTROLLER         Role = 13
 )
 
 // Enum value maps for Role.
 var (
 	Role_name = map[int32]string{
-		0: "ROLE_UNSPECIFIED",
-		1: "ROLE_ADMIN",
-		2: "ROLE_ISSUER",
-		3: "ROLE_REDEEMER",
-		4: "ROLE_CONTROLLER",
-		5: "ROLE_MODULE_EDITOR",
-		6: "ROLE_WHITELIST_EDITOR",
+		0:  "ROLE_UNSPECIFIED",
+		1:  "ROLE_ADMIN",
+		2:  "ROLE_CONTROLLER",
+		3:  "ROLE_ISSUER",
+		4:  "ROLE_PAUSER",
+		5:  "ROLE_REDEEMER",
+		6:  "ROLE_CAP_EDITOR",
+		7:  "ROLE_MODULE_EDITOR",
+		8:  "ROLE_DOCUMENT_EDITOR",
+		9:  "ROLE_WHITELIST_EDITOR",
+		10: "ROLE_TIME_LOCK_EDITOR",
+		11: "ROLE_SPENDING_LIMITS_EDITOR",
+		12: "ROLE_VESTING_PERIOD_EDITOR",
+		13: "ROLE_GSN_CONTROLLER",
 	}
 	Role_value = map[string]int32{
-		"ROLE_UNSPECIFIED":      0,
-		"ROLE_ADMIN":            1,
-		"ROLE_ISSUER":           2,
-		"ROLE_REDEEMER":         3,
-		"ROLE_CONTROLLER":       4,
-		"ROLE_MODULE_EDITOR":    5,
-		"ROLE_WHITELIST_EDITOR": 6,
+		"ROLE_UNSPECIFIED":            0,
+		"ROLE_ADMIN":                  1,
+		"ROLE_CONTROLLER":             2,
+		"ROLE_ISSUER":                 3,
+		"ROLE_PAUSER":                 4,
+		"ROLE_REDEEMER":               5,
+		"ROLE_CAP_EDITOR":             6,
+		"ROLE_MODULE_EDITOR":          7,
+		"ROLE_DOCUMENT_EDITOR":        8,
+		"ROLE_WHITELIST_EDITOR":       9,
+		"ROLE_TIME_LOCK_EDITOR":       10,
+		"ROLE_SPENDING_LIMITS_EDITOR": 11,
+		"ROLE_VESTING_PERIOD_EDITOR":  12,
+		"ROLE_GSN_CONTROLLER":         13,
 	}
 )
 
@@ -390,6 +411,137 @@ func (x *Partition) GetMetadata() *Partition_Metadata {
 	return nil
 }
 
+type Module struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Address string `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	// Types that are assignable to Data:
+	//
+	//	*Module_Whitelist_
+	//	*Module_Blacklist_
+	//	*Module_Timelock_
+	//	*Module_SpendingLimit_
+	//	*Module_VestingPeriod_
+	Data isModule_Data `protobuf_oneof:"data"`
+}
+
+func (x *Module) Reset() {
+	*x = Module{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_token_v1_token_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Module) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Module) ProtoMessage() {}
+
+func (x *Module) ProtoReflect() protoreflect.Message {
+	mi := &file_token_v1_token_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Module.ProtoReflect.Descriptor instead.
+func (*Module) Descriptor() ([]byte, []int) {
+	return file_token_v1_token_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Module) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (m *Module) GetData() isModule_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (x *Module) GetWhitelist() *Module_Whitelist {
+	if x, ok := x.GetData().(*Module_Whitelist_); ok {
+		return x.Whitelist
+	}
+	return nil
+}
+
+func (x *Module) GetBlacklist() *Module_Blacklist {
+	if x, ok := x.GetData().(*Module_Blacklist_); ok {
+		return x.Blacklist
+	}
+	return nil
+}
+
+func (x *Module) GetTimelock() *Module_Timelock {
+	if x, ok := x.GetData().(*Module_Timelock_); ok {
+		return x.Timelock
+	}
+	return nil
+}
+
+func (x *Module) GetSpendingLimit() *Module_SpendingLimit {
+	if x, ok := x.GetData().(*Module_SpendingLimit_); ok {
+		return x.SpendingLimit
+	}
+	return nil
+}
+
+func (x *Module) GetVestingPeriod() *Module_VestingPeriod {
+	if x, ok := x.GetData().(*Module_VestingPeriod_); ok {
+		return x.VestingPeriod
+	}
+	return nil
+}
+
+type isModule_Data interface {
+	isModule_Data()
+}
+
+type Module_Whitelist_ struct {
+	Whitelist *Module_Whitelist `protobuf:"bytes,2,opt,name=whitelist,proto3,oneof"`
+}
+
+type Module_Blacklist_ struct {
+	Blacklist *Module_Blacklist `protobuf:"bytes,3,opt,name=blacklist,proto3,oneof"`
+}
+
+type Module_Timelock_ struct {
+	Timelock *Module_Timelock `protobuf:"bytes,4,opt,name=timelock,proto3,oneof"`
+}
+
+type Module_SpendingLimit_ struct {
+	SpendingLimit *Module_SpendingLimit `protobuf:"bytes,5,opt,name=spending_limit,json=spendingLimit,proto3,oneof"`
+}
+
+type Module_VestingPeriod_ struct {
+	VestingPeriod *Module_VestingPeriod `protobuf:"bytes,6,opt,name=vesting_period,json=vestingPeriod,proto3,oneof"`
+}
+
+func (*Module_Whitelist_) isModule_Data() {}
+
+func (*Module_Blacklist_) isModule_Data() {}
+
+func (*Module_Timelock_) isModule_Data() {}
+
+func (*Module_SpendingLimit_) isModule_Data() {}
+
+func (*Module_VestingPeriod_) isModule_Data() {}
+
 type SecurityToken_Metadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -401,7 +553,7 @@ type SecurityToken_Metadata struct {
 func (x *SecurityToken_Metadata) Reset() {
 	*x = SecurityToken_Metadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_token_v1_token_proto_msgTypes[4]
+		mi := &file_token_v1_token_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -414,7 +566,7 @@ func (x *SecurityToken_Metadata) String() string {
 func (*SecurityToken_Metadata) ProtoMessage() {}
 
 func (x *SecurityToken_Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_token_v1_token_proto_msgTypes[4]
+	mi := &file_token_v1_token_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -451,7 +603,7 @@ type Issuer_Metadata struct {
 func (x *Issuer_Metadata) Reset() {
 	*x = Issuer_Metadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_token_v1_token_proto_msgTypes[5]
+		mi := &file_token_v1_token_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -464,7 +616,7 @@ func (x *Issuer_Metadata) String() string {
 func (*Issuer_Metadata) ProtoMessage() {}
 
 func (x *Issuer_Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_token_v1_token_proto_msgTypes[5]
+	mi := &file_token_v1_token_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -519,7 +671,7 @@ type Document_Metadata struct {
 func (x *Document_Metadata) Reset() {
 	*x = Document_Metadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_token_v1_token_proto_msgTypes[6]
+		mi := &file_token_v1_token_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -532,7 +684,7 @@ func (x *Document_Metadata) String() string {
 func (*Document_Metadata) ProtoMessage() {}
 
 func (x *Document_Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_token_v1_token_proto_msgTypes[6]
+	mi := &file_token_v1_token_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -567,7 +719,7 @@ type Partition_Metadata struct {
 func (x *Partition_Metadata) Reset() {
 	*x = Partition_Metadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_token_v1_token_proto_msgTypes[7]
+		mi := &file_token_v1_token_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -580,7 +732,7 @@ func (x *Partition_Metadata) String() string {
 func (*Partition_Metadata) ProtoMessage() {}
 
 func (x *Partition_Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_token_v1_token_proto_msgTypes[7]
+	mi := &file_token_v1_token_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -608,6 +760,196 @@ func (x *Partition_Metadata) GetProperties() []*v1.Property {
 		return x.Properties
 	}
 	return nil
+}
+
+type Module_Whitelist struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Module_Whitelist) Reset() {
+	*x = Module_Whitelist{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_token_v1_token_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Module_Whitelist) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Module_Whitelist) ProtoMessage() {}
+
+func (x *Module_Whitelist) ProtoReflect() protoreflect.Message {
+	mi := &file_token_v1_token_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Module_Whitelist.ProtoReflect.Descriptor instead.
+func (*Module_Whitelist) Descriptor() ([]byte, []int) {
+	return file_token_v1_token_proto_rawDescGZIP(), []int{4, 0}
+}
+
+type Module_Blacklist struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Module_Blacklist) Reset() {
+	*x = Module_Blacklist{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_token_v1_token_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Module_Blacklist) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Module_Blacklist) ProtoMessage() {}
+
+func (x *Module_Blacklist) ProtoReflect() protoreflect.Message {
+	mi := &file_token_v1_token_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Module_Blacklist.ProtoReflect.Descriptor instead.
+func (*Module_Blacklist) Descriptor() ([]byte, []int) {
+	return file_token_v1_token_proto_rawDescGZIP(), []int{4, 1}
+}
+
+type Module_Timelock struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Module_Timelock) Reset() {
+	*x = Module_Timelock{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_token_v1_token_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Module_Timelock) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Module_Timelock) ProtoMessage() {}
+
+func (x *Module_Timelock) ProtoReflect() protoreflect.Message {
+	mi := &file_token_v1_token_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Module_Timelock.ProtoReflect.Descriptor instead.
+func (*Module_Timelock) Descriptor() ([]byte, []int) {
+	return file_token_v1_token_proto_rawDescGZIP(), []int{4, 2}
+}
+
+type Module_SpendingLimit struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Module_SpendingLimit) Reset() {
+	*x = Module_SpendingLimit{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_token_v1_token_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Module_SpendingLimit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Module_SpendingLimit) ProtoMessage() {}
+
+func (x *Module_SpendingLimit) ProtoReflect() protoreflect.Message {
+	mi := &file_token_v1_token_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Module_SpendingLimit.ProtoReflect.Descriptor instead.
+func (*Module_SpendingLimit) Descriptor() ([]byte, []int) {
+	return file_token_v1_token_proto_rawDescGZIP(), []int{4, 3}
+}
+
+type Module_VestingPeriod struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Module_VestingPeriod) Reset() {
+	*x = Module_VestingPeriod{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_token_v1_token_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Module_VestingPeriod) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Module_VestingPeriod) ProtoMessage() {}
+
+func (x *Module_VestingPeriod) ProtoReflect() protoreflect.Message {
+	mi := &file_token_v1_token_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Module_VestingPeriod.ProtoReflect.Descriptor instead.
+func (*Module_VestingPeriod) Descriptor() ([]byte, []int) {
+	return file_token_v1_token_proto_rawDescGZIP(), []int{4, 4}
 }
 
 var File_token_v1_token_proto protoreflect.FileDescriptor
@@ -672,27 +1014,66 @@ var file_token_v1_token_proto_rawDesc = []byte{
 	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x33, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x70,
 	0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63,
 	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74,
-	0x79, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x2a, 0x98, 0x01,
-	0x0a, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14, 0x0a, 0x10, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x55,
-	0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a,
-	0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x41, 0x44, 0x4d, 0x49, 0x4e, 0x10, 0x01, 0x12, 0x0f, 0x0a, 0x0b,
-	0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x49, 0x53, 0x53, 0x55, 0x45, 0x52, 0x10, 0x02, 0x12, 0x11, 0x0a,
-	0x0d, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x52, 0x45, 0x44, 0x45, 0x45, 0x4d, 0x45, 0x52, 0x10, 0x03,
-	0x12, 0x13, 0x0a, 0x0f, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x43, 0x4f, 0x4e, 0x54, 0x52, 0x4f, 0x4c,
-	0x4c, 0x45, 0x52, 0x10, 0x04, 0x12, 0x16, 0x0a, 0x12, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x4d, 0x4f,
-	0x44, 0x55, 0x4c, 0x45, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x05, 0x12, 0x19, 0x0a,
-	0x15, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x57, 0x48, 0x49, 0x54, 0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f,
-	0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x06, 0x42, 0x93, 0x01, 0x0a, 0x0c, 0x63, 0x6f, 0x6d,
-	0x2e, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31, 0x42, 0x0a, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x36, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2d, 0x74, 0x6f, 0x6b,
-	0x65, 0x6e, 0x2f, 0x63, 0x6f, 0x72, 0x65, 0x2f, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x2f, 0x74,
-	0x6f, 0x6b, 0x65, 0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x76, 0x31, 0xa2,
-	0x02, 0x03, 0x54, 0x58, 0x58, 0xaa, 0x02, 0x08, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x56, 0x31,
-	0xca, 0x02, 0x08, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x14, 0x54, 0x6f,
-	0x6b, 0x65, 0x6e, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61,
-	0x74, 0x61, 0xea, 0x02, 0x09, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x79, 0x52, 0x0a, 0x70, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x22, 0xb5, 0x03,
+	0x0a, 0x06, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x12, 0x3a, 0x0a, 0x09, 0x77, 0x68, 0x69, 0x74, 0x65, 0x6c, 0x69, 0x73, 0x74, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31,
+	0x2e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x57, 0x68, 0x69, 0x74, 0x65, 0x6c, 0x69, 0x73,
+	0x74, 0x48, 0x00, 0x52, 0x09, 0x77, 0x68, 0x69, 0x74, 0x65, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x3a,
+	0x0a, 0x09, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x73, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x6f, 0x64,
+	0x75, 0x6c, 0x65, 0x2e, 0x42, 0x6c, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x73, 0x74, 0x48, 0x00, 0x52,
+	0x09, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x73, 0x74, 0x12, 0x37, 0x0a, 0x08, 0x74, 0x69,
+	0x6d, 0x65, 0x6c, 0x6f, 0x63, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x74,
+	0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x54,
+	0x69, 0x6d, 0x65, 0x6c, 0x6f, 0x63, 0x6b, 0x48, 0x00, 0x52, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x6c,
+	0x6f, 0x63, 0x6b, 0x12, 0x47, 0x0a, 0x0e, 0x73, 0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x5f,
+	0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x74, 0x6f,
+	0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x53, 0x70,
+	0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x48, 0x00, 0x52, 0x0d, 0x73,
+	0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x47, 0x0a, 0x0e,
+	0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31, 0x2e,
+	0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x65,
+	0x72, 0x69, 0x6f, 0x64, 0x48, 0x00, 0x52, 0x0d, 0x76, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x50,
+	0x65, 0x72, 0x69, 0x6f, 0x64, 0x1a, 0x0b, 0x0a, 0x09, 0x57, 0x68, 0x69, 0x74, 0x65, 0x6c, 0x69,
+	0x73, 0x74, 0x1a, 0x0b, 0x0a, 0x09, 0x42, 0x6c, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x73, 0x74, 0x1a,
+	0x0a, 0x0a, 0x08, 0x54, 0x69, 0x6d, 0x65, 0x6c, 0x6f, 0x63, 0x6b, 0x1a, 0x0f, 0x0a, 0x0d, 0x53,
+	0x70, 0x65, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x1a, 0x0f, 0x0a, 0x0d,
+	0x56, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x42, 0x06, 0x0a,
+	0x04, 0x64, 0x61, 0x74, 0x61, 0x2a, 0xcd, 0x02, 0x0a, 0x04, 0x52, 0x6f, 0x6c, 0x65, 0x12, 0x14,
+	0x0a, 0x10, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
+	0x45, 0x44, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x41, 0x44, 0x4d,
+	0x49, 0x4e, 0x10, 0x01, 0x12, 0x13, 0x0a, 0x0f, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x43, 0x4f, 0x4e,
+	0x54, 0x52, 0x4f, 0x4c, 0x4c, 0x45, 0x52, 0x10, 0x02, 0x12, 0x0f, 0x0a, 0x0b, 0x52, 0x4f, 0x4c,
+	0x45, 0x5f, 0x49, 0x53, 0x53, 0x55, 0x45, 0x52, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x52, 0x4f,
+	0x4c, 0x45, 0x5f, 0x50, 0x41, 0x55, 0x53, 0x45, 0x52, 0x10, 0x04, 0x12, 0x11, 0x0a, 0x0d, 0x52,
+	0x4f, 0x4c, 0x45, 0x5f, 0x52, 0x45, 0x44, 0x45, 0x45, 0x4d, 0x45, 0x52, 0x10, 0x05, 0x12, 0x13,
+	0x0a, 0x0f, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x43, 0x41, 0x50, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f,
+	0x52, 0x10, 0x06, 0x12, 0x16, 0x0a, 0x12, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x4d, 0x4f, 0x44, 0x55,
+	0x4c, 0x45, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x07, 0x12, 0x18, 0x0a, 0x14, 0x52,
+	0x4f, 0x4c, 0x45, 0x5f, 0x44, 0x4f, 0x43, 0x55, 0x4d, 0x45, 0x4e, 0x54, 0x5f, 0x45, 0x44, 0x49,
+	0x54, 0x4f, 0x52, 0x10, 0x08, 0x12, 0x19, 0x0a, 0x15, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x57, 0x48,
+	0x49, 0x54, 0x45, 0x4c, 0x49, 0x53, 0x54, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x09,
+	0x12, 0x19, 0x0a, 0x15, 0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x54, 0x49, 0x4d, 0x45, 0x5f, 0x4c, 0x4f,
+	0x43, 0x4b, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x0a, 0x12, 0x1f, 0x0a, 0x1b, 0x52,
+	0x4f, 0x4c, 0x45, 0x5f, 0x53, 0x50, 0x45, 0x4e, 0x44, 0x49, 0x4e, 0x47, 0x5f, 0x4c, 0x49, 0x4d,
+	0x49, 0x54, 0x53, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x0b, 0x12, 0x1e, 0x0a, 0x1a,
+	0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x56, 0x45, 0x53, 0x54, 0x49, 0x4e, 0x47, 0x5f, 0x50, 0x45, 0x52,
+	0x49, 0x4f, 0x44, 0x5f, 0x45, 0x44, 0x49, 0x54, 0x4f, 0x52, 0x10, 0x0c, 0x12, 0x17, 0x0a, 0x13,
+	0x52, 0x4f, 0x4c, 0x45, 0x5f, 0x47, 0x53, 0x4e, 0x5f, 0x43, 0x4f, 0x4e, 0x54, 0x52, 0x4f, 0x4c,
+	0x4c, 0x45, 0x52, 0x10, 0x0d, 0x42, 0x93, 0x01, 0x0a, 0x0c, 0x63, 0x6f, 0x6d, 0x2e, 0x74, 0x6f,
+	0x6b, 0x65, 0x6e, 0x2e, 0x76, 0x31, 0x42, 0x0a, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x36, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x73, 0x65, 0x63, 0x75, 0x72, 0x69, 0x74, 0x79, 0x2d, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x2f,
+	0x63, 0x6f, 0x72, 0x65, 0x2f, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x2f, 0x74, 0x6f, 0x6b, 0x65,
+	0x6e, 0x2f, 0x76, 0x31, 0x3b, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x54,
+	0x58, 0x58, 0xaa, 0x02, 0x08, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x08,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x14, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
+	0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea,
+	0x02, 0x09, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -708,30 +1089,41 @@ func file_token_v1_token_proto_rawDescGZIP() []byte {
 }
 
 var file_token_v1_token_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_token_v1_token_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_token_v1_token_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_token_v1_token_proto_goTypes = []interface{}{
 	(Role)(0),                      // 0: token.v1.Role
 	(*SecurityToken)(nil),          // 1: token.v1.SecurityToken
 	(*Issuer)(nil),                 // 2: token.v1.Issuer
 	(*Document)(nil),               // 3: token.v1.Document
 	(*Partition)(nil),              // 4: token.v1.Partition
-	(*SecurityToken_Metadata)(nil), // 5: token.v1.SecurityToken.Metadata
-	(*Issuer_Metadata)(nil),        // 6: token.v1.Issuer.Metadata
-	(*Document_Metadata)(nil),      // 7: token.v1.Document.Metadata
-	(*Partition_Metadata)(nil),     // 8: token.v1.Partition.Metadata
-	(*v1.Property)(nil),            // 9: common.v1.Property
+	(*Module)(nil),                 // 5: token.v1.Module
+	(*SecurityToken_Metadata)(nil), // 6: token.v1.SecurityToken.Metadata
+	(*Issuer_Metadata)(nil),        // 7: token.v1.Issuer.Metadata
+	(*Document_Metadata)(nil),      // 8: token.v1.Document.Metadata
+	(*Partition_Metadata)(nil),     // 9: token.v1.Partition.Metadata
+	(*Module_Whitelist)(nil),       // 10: token.v1.Module.Whitelist
+	(*Module_Blacklist)(nil),       // 11: token.v1.Module.Blacklist
+	(*Module_Timelock)(nil),        // 12: token.v1.Module.Timelock
+	(*Module_SpendingLimit)(nil),   // 13: token.v1.Module.SpendingLimit
+	(*Module_VestingPeriod)(nil),   // 14: token.v1.Module.VestingPeriod
+	(*v1.Property)(nil),            // 15: common.v1.Property
 }
 var file_token_v1_token_proto_depIdxs = []int32{
-	5, // 0: token.v1.SecurityToken.metadata:type_name -> token.v1.SecurityToken.Metadata
-	6, // 1: token.v1.Issuer.metadata:type_name -> token.v1.Issuer.Metadata
-	7, // 2: token.v1.Document.metadata:type_name -> token.v1.Document.Metadata
-	8, // 3: token.v1.Partition.metadata:type_name -> token.v1.Partition.Metadata
-	9, // 4: token.v1.Partition.Metadata.properties:type_name -> common.v1.Property
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	6,  // 0: token.v1.SecurityToken.metadata:type_name -> token.v1.SecurityToken.Metadata
+	7,  // 1: token.v1.Issuer.metadata:type_name -> token.v1.Issuer.Metadata
+	8,  // 2: token.v1.Document.metadata:type_name -> token.v1.Document.Metadata
+	9,  // 3: token.v1.Partition.metadata:type_name -> token.v1.Partition.Metadata
+	10, // 4: token.v1.Module.whitelist:type_name -> token.v1.Module.Whitelist
+	11, // 5: token.v1.Module.blacklist:type_name -> token.v1.Module.Blacklist
+	12, // 6: token.v1.Module.timelock:type_name -> token.v1.Module.Timelock
+	13, // 7: token.v1.Module.spending_limit:type_name -> token.v1.Module.SpendingLimit
+	14, // 8: token.v1.Module.vesting_period:type_name -> token.v1.Module.VestingPeriod
+	15, // 9: token.v1.Partition.Metadata.properties:type_name -> common.v1.Property
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_token_v1_token_proto_init() }
@@ -789,7 +1181,7 @@ func file_token_v1_token_proto_init() {
 			}
 		}
 		file_token_v1_token_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SecurityToken_Metadata); i {
+			switch v := v.(*Module); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -801,7 +1193,7 @@ func file_token_v1_token_proto_init() {
 			}
 		}
 		file_token_v1_token_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Issuer_Metadata); i {
+			switch v := v.(*SecurityToken_Metadata); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -813,7 +1205,7 @@ func file_token_v1_token_proto_init() {
 			}
 		}
 		file_token_v1_token_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Document_Metadata); i {
+			switch v := v.(*Issuer_Metadata); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -825,6 +1217,18 @@ func file_token_v1_token_proto_init() {
 			}
 		}
 		file_token_v1_token_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Document_Metadata); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_token_v1_token_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Partition_Metadata); i {
 			case 0:
 				return &v.state
@@ -836,6 +1240,73 @@ func file_token_v1_token_proto_init() {
 				return nil
 			}
 		}
+		file_token_v1_token_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Module_Whitelist); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_token_v1_token_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Module_Blacklist); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_token_v1_token_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Module_Timelock); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_token_v1_token_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Module_SpendingLimit); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_token_v1_token_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Module_VestingPeriod); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	file_token_v1_token_proto_msgTypes[4].OneofWrappers = []interface{}{
+		(*Module_Whitelist_)(nil),
+		(*Module_Blacklist_)(nil),
+		(*Module_Timelock_)(nil),
+		(*Module_SpendingLimit_)(nil),
+		(*Module_VestingPeriod_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -843,7 +1314,7 @@ func file_token_v1_token_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_token_v1_token_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
