@@ -67,13 +67,14 @@ message Module {
   message VestingPeriod {}
 
   string address = 1;
-  
+  string access_control = 2;
+
   oneof data {
-    Whitelist whitelist = 2;
-    Blacklist blacklist = 3;
-    Timelock timelock = 4;
-    SpendingLimit spending_limit = 5;
-    VestingPeriod vesting_period = 6;
+    Whitelist whitelist = 3;
+    Blacklist blacklist = 4;
+    Timelock timelock = 5;
+    SpendingLimit spending_limit = 6;
+    VestingPeriod vesting_period = 7;
   }
 }
 
