@@ -9,11 +9,12 @@ option go_package = "github.com/security-token/core/domain/wallet/v1;wallet";
 
 message Wallet {
   message Project {
-    token.v1.SecurityToken.Metadata token = 1;
-    map<string, token.v1.Partition.Metadata> partitions = 2;
-    map<string, token.v1.Document.Metadata> documents = 3;
-    map<string, account.v1.Account.Metadata> accounts = 4;
-    repeated transaction.v1.Transaction transactions = 5;
+    bool watching = 1;
+    token.v1.SecurityToken.Metadata token = 2;
+    map<string, token.v1.Partition.Metadata> partitions = 3;
+    map<string, token.v1.Document.Metadata> documents = 4;
+    map<string, account.v1.Account.Metadata> accounts = 5;
+    repeated transaction.v1.Transaction transactions = 6;
   }
 
   string account = 1;
