@@ -10,11 +10,3 @@ plugins:
   - plugin: go
     out: domain
     opt: paths=source_relative
-  - plugin: go-grpc
-    out: domain
-    opt: paths=source_relative
-  - plugin: buf.build/grpc-ecosystem/gateway
-    out: domain
-    opt: paths=source_relative
-  - plugin: buf.build/grpc-ecosystem/openapiv2
-    out: domain

@@ -42,7 +42,7 @@ message Document {
 
   string name = 2;
   string uri = 3;
-  string hash = 4;
+  bytes hash = 4;
   Metadata metadata = 10;
 }
 
