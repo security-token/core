@@ -3,8 +3,6 @@ package token.v1;
 
 import "common/v1/common.proto";
 
-option go_package = "github.com/security-token/core/domain/token/v1;token";
-
 message SecurityToken {
   message Metadata {
     string logo = 1;

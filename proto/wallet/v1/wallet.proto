@@ -5,9 +5,13 @@ import "account/v1/account.proto";
 import "token/v1/token.proto";
 import "transaction/v1/transaction.proto";
 
-option go_package = "github.com/security-token/core/domain/wallet/v1;wallet";
-
 message Wallet {
+  message Details {
+    string name = 1;
+    string email = 2;
+    bytes avatar = 3;
+  }
+
   message Project {
     bool watching = 1;
     token.v1.SecurityToken.Metadata token = 2;
@@ -21,5 +25,7 @@ message Wallet {
 
   string account = 1;
   string network_id = 2;
-  map<string, Project> projects = 3;
+
+  Details details = 3;
+  map<string, Project> projects = 4;
 }

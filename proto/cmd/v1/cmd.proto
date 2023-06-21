@@ -3,8 +3,6 @@ package cmd.v1;
 
 import "token/v1/token.proto";
 
-option go_package = "github.com/security-token/core/domain/cmd/v1;cmd";
-
 message Command {
   message ShareProject {
     string address = 1;
