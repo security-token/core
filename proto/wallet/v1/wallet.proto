@@ -20,7 +20,6 @@ message Wallet {
     repeated transaction.v1.Transaction transactions = 4;
 
     map<string, token.v1.Document.Metadata> documents = 5;
-    map<string, account.v1.Account.Metadata> accounts = 6;
   }
 
   string account = 1;
@@ -28,4 +27,5 @@ message Wallet {
 
   Details details = 3;
   map<string, Project> projects = 4;
+  map<string, account.v1.Account.Metadata> accounts = 5;
 }
