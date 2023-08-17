@@ -7,25 +7,25 @@ import "transaction/v1/transaction.proto";
 
 message Wallet {
   message Details {
-    string name = 1;
-    string email = 2;
-    bytes avatar = 3;
+    string firstname = 1;
+    string lastname = 2;
+    string email = 3;
+    string avatar = 4;
   }
 
   message Project {
-    bool watching = 1;
-    token.v1.SecurityToken.Metadata token = 2;
+    uint64 chain_id = 1;
+    token.v1.SecurityToken.Metadata metadata = 2;
 
     repeated bytes partitions = 3;
-    repeated transaction.v1.Transaction transactions = 4;
+    repeated bytes documents = 4;
+    repeated string modules = 5;
 
-    map<string, token.v1.Document.Metadata> documents = 5;
+    repeated transaction.v1.Transaction transactions = 6;
   }
 
   string account = 1;
-  string network_id = 2;
-
-  Details details = 3;
-  map<string, Project> projects = 4;
-  map<string, account.v1.Account.Metadata> accounts = 5;
+  Details details = 2;
+  map<string, Project> projects = 3;
+  map<string, account.v1.Account.Metadata> accounts = 4;
 }

@@ -6,6 +6,7 @@ import "common/v1/common.proto";
 message SecurityToken {
   message Metadata {
     string logo = 1;
+    optional bool certified = 2;
   }
 
   string address = 1;

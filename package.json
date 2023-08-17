@@ -1,6 +1,6 @@
 {
   "name": "security-token-core",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "MIT",
   "author": "Amaury Diaz <amauryuh@gmail.com>",
   "description": "This package contains openapi definitions for secure wallet project"

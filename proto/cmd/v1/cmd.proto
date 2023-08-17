@@ -1,17 +1,22 @@
 syntax = "proto3";
 package cmd.v1;
 
-import "token/v1/token.proto";
+import "account/v1/account.proto";
+import "wallet/v1/wallet.proto";
 
 message Command {
-  message ShareProject {
+  message AddAccount {
     string address = 1;
-    token.v1.SecurityToken.Metadata metadata = 2;
+    account.v1.Account.Metadata account = 2;
   }
 
-  string network_id = 1;
+  message AddProject {
+    string address = 1;
+    wallet.v1.Wallet.Project project = 2;
+  }
 
   oneof data {
-    ShareProject share_project = 2;
+    AddAccount add_account = 1;
+    AddProject add_project = 2;
   }
 }
