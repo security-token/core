@@ -2,7 +2,6 @@ syntax = "proto3";
 package common.v1;
 
 message Property {
-  string name = 1;
+  string trait_type = 1;
   string value = 2;
-  string unit = 3;
 }

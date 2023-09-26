@@ -1,0 +1,6 @@
+syntax = "proto3";
+package transaction.v1;
+
+message TransactionIntent {
+  string reference = 1;
+}

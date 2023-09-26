@@ -48,8 +48,9 @@ message Document {
 message Partition {
   message Metadata {
     string name = 1;
-    optional string image = 2;
-    repeated common.v1.Property properties = 3;
+    string description = 2;
+    optional string image = 3;
+    repeated common.v1.Property properties = 4;
   }
 
   string token = 1;

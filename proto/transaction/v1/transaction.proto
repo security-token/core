@@ -44,12 +44,13 @@ message Transaction {
       bytes partition = 1;
       string recipient = 2;
       uint64 amount = 3;
+      bytes calldata = 4;
     }
 
     message RedeemByPartition {
       bytes partition = 1;
       uint64 value = 2;
-      bytes data = 3;
+      bytes calldata = 3;
     }
 
     message OperatorRedeemByPartition {
